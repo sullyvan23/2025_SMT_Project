@@ -1,13 +1,3 @@
-# Collects all balls that hit the ground then are acquired by an outfielder
-game_events_ground <- game_events %>%
-    # Group by game and play
-    group_by(game_str, play_id) %>%
-    # Looking for ball on ground
-    filter((player_position == 255 & event_code == 16) & 
-               # Where the next row is the outfielder acquiring the ball
-               (lead(player_position) %in% c(7,8,9) & lead(event_code) == 2)) %>%
-    ungroup()
-
 # Collects all outfielders acquiring ball after it’s hit ground
 game_events_field <- game_events %>%
     group_by(game_str, play_id) %>%
@@ -17,21 +7,54 @@ game_events_field <- game_events %>%
                (lag(player_position) == 255 & lag(event_code) == 16)) %>%
     ungroup()
 
-# Combines both data frames and sorts chronologically
-game_events_bounce_to_OF <- bind_rows(game_events_ground, game_events_field) %>%
-    arrange(game_str, play_id, timestamp)
-
 run_on_2nd <- game_info %>% 
     filter(!is.na(second_baserunner))
 
-ball_ground_run_on_2nd <- game_events_bounce_to_OF %>%
-    # Join the game_info to the bounce to OF game events
-    left_join(run_on_2nd, by = join_by("game_str", "at_bat", "play_per_game", "Season", "HomeTeam", "AwayTeam", "Day")) %>%
-    # Select only necessary columns
-    select(game_str, play_id, at_bat, play_per_game, timestamp, 
-           player_position, event_code, second_baserunner) %>%
-    filter(!is.na(second_baserunner))
-
-run2nd_fielded <- ball_ground_run_on_2nd %>%
-    filter(player_position != 255) %>%
+run2nd_pos <- player_pos %>%
+    # Create composite key
+    mutate(key_run = paste(game_str, play_id, timestamp, sep = "_")) %>%
+    filter(
+        key_run %in% (game_events_field %>%
+                          mutate(key_run = paste(game_str, play_id, timestamp, sep = "_")) %>%
+                          pull(key_run)),
+        player_position == 12
+    ) %>%
+    # Deselect some unnecessary columns
+    select(-c("Season", "HomeTeam", "AwayTeam", "Day")) %>%
     collect()
+
+run2nd_pos <- run2nd_pos %>% rename(runner = player_position)
+run2nd_pos <- run2nd_pos %>% rename(run_x = field_x)
+run2nd_pos <- run2nd_pos %>% rename(run_y = field_y)
+
+game_events_field <- game_events_field %>%
+    mutate(key_run = paste(game_str, play_id, timestamp, sep = "_"))
+
+messy_stats <- full_join(game_events_field, run2nd_pos[,4:7], by = "key_run")
+
+messy_stats <- messy_stats %>%
+    filter(!is.na(runner))
+
+run2nd_OF_pos <- player_pos %>%
+    # Create composite key
+    mutate(key_of = paste(game_str, play_id, timestamp, player_position, sep = "_")) %>%
+    filter(
+        key_of %in% (messy_stats %>%
+            mutate(key_of = paste(game_str, play_id, timestamp, player_position, sep = "_")) %>%
+            pull(key_of))
+    ) %>%
+    # Deselect some unnecessary columns
+    select(-c("Season", "HomeTeam", "AwayTeam", "Day")) %>%
+    collect()
+
+run2nd_OF_pos <- run2nd_OF_pos %>% rename(OF = player_position)
+run2nd_OF_pos <- run2nd_OF_pos %>% rename(OF_x = field_x)
+run2nd_OF_pos <- run2nd_OF_pos %>% rename(OF_y = field_y)
+
+messy_stats <- messy_stats %>%
+    mutate(key_of = paste(game_str, play_id, timestamp, player_position, sep = "_"))
+
+messy_stats <- full_join(messy_stats, run2nd_OF_pos[,4:7], by = "key_of")
+
+messy_stats <- messy_stats %>%
+    filter(!is.na(OF))
