@@ -55,3 +55,5 @@ all_final_data_3 <- all_final_data_2 %>%
 
 all_final_data_3 <- all_final_data_3 %>%
     filter(run_dist <= 180)
+
+# Did more work in excel to get good baserunning situations
