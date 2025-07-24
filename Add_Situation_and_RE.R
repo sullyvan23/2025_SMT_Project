@@ -21,3 +21,6 @@ all_final_data_4 <- all_final_data_4 %>% rename(stay_RE = run_exp)
 
 all_final_data_4 <- all_final_data_4 %>% 
     mutate(prob_to_go = (stay_RE - go_out_RE)/(go_safe_RE - go_out_RE))
+
+all_went_data <- all_final_data_4[,1:9] %>%
+    mutate(def_safe = ifelse(score_chance < 1, 0, 1))
