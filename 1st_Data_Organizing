@@ -1,0 +1,10 @@
+final_1st_stats <- final_1st_stats %>%
+    filter(!is.na(run_dist))
+
+final_1st_data <- final_1st_stats[,c(1:9,14:15)]
+
+final_1st_data <- final_1st_data %>%
+    mutate(go_safe_out = ifelse(is.na(safe_out), 0, safe_out))
+
+went_1st_data <- final_1st_data %>%
+    filter(!is.na(safe_out))
