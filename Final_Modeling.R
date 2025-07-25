@@ -137,6 +137,12 @@ PVJ QEA QZE RDO RQJ RZQ STK TEQ TKJ TSZ UEX UKI UPU UWE VHS VMN VZE WJU WMI WNA 
 YJD YUH 
 192   3
 
+all_final_data_6 <- all_final_data_6 %>%
+    mutate(RE_diff = ((glm_safe * go_safe_RE) + ((1 - glm_safe) * go_out_RE)) - stay_RE )
+
+mean(abs(ifelse(all_final_data_6$correct_decision == 0, abs(all_final_data_6$RE_diff), 0)))
+[1] 0.01653246
+
 QEA_final_data <- all_final_data_6 %>%
     filter(team == "QEA")
 QEA_confusion_matrix <- table(Predicted = QEA_final_data$should_go, Actual = QEA_final_data$went_home)
@@ -149,6 +155,9 @@ Predicted  0  1
 Didn’t send 13.0% of players who the model would send
 Sent 20% of players the model wouldn’t send
 
+mean(abs(ifelse(QEA_final_data$correct_decision == 0, abs(QEA_final_data$RE_diff), 0)))
+[1] 0.01545368
+ 
 
 RZQ_final_data <- all_final_data_6 %>%
     filter(team == "RZQ")
@@ -162,6 +171,9 @@ Predicted   0   1
 Didn’t send 7.8% of players who the model would send
 Sent 5.9% of players the model wouldn’t send
 
+mean(abs(ifelse(RZQ_final_data$correct_decision == 0, abs(RZQ_final_data$RE_diff), 0)))
+[1] 0.01477362
+
 
 YJD_final_data <- all_final_data_6 %>%
     filter(team == "YJD")
@@ -174,8 +186,11 @@ Predicted  0  1
 
 Didn’t send 11% of players who the model would send
 Sent 7.2% of players the model wouldn’t send
-incorrect_decision <- all_final_data_6 %>%
-    filter(correct_decision == 0)
+
+mean(abs(ifelse(YJD_final_data$correct_decision == 0, abs(YJD_final_data$RE_diff), 0)))
+[1] 0.01508011
+
+
 all_final_data_scaled <- all_final_data_6
 
 all_final_data_scaled[,c(2:7,23)] <- scale(all_final_data_6[,c(2:7,23)])
@@ -218,7 +233,7 @@ OF_momentum_home OF_momentum_side       prob_to_go
 Third base coaches according to model…
 Slightly don’t use OF_dist enough
 Slightly don’t use run_speed enough
-Use top_speed too much
+Use top_speed way too much
 Don’t use OF_momentum_home enough
 Slightly don’t use OF_momentum_side enough
 Don’t use prob_to_go / situation nearly enough
