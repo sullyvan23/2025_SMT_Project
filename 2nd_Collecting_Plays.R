@@ -1,4 +1,4 @@
-# Collects all outfielders acquiring ball after it’s hit ground
+# Collecing plays where outfielder acquiring ball after it’s hit ground
 game_events_field <- game_events %>%
     group_by(game_str, play_id) %>%
     # Looking for outfielder acquiring the ball
@@ -33,14 +33,14 @@ game_events_field <- game_events_field %>%
     mutate(key_run = paste(game_str, play_id, timestamp, sep = "_"))
 
 
-# Joining to get plays where runner on 1st and outfielder fields the ball
+# Combining runner on 2nd and outfielder fielding ball to get the plays where both happened
 messy_stats <- full_join(game_events_field, run2nd_pos[,4:7], by = "key_run")
 
 messy_stats <- messy_stats %>%
     filter(!is.na(runner))
 
 
-# Getting outfielder and runner positions when the ball is fielded
+# Getting positions of outfielder and runner at the time the ball is fielded
 run2nd_OF_pos <- player_pos %>%
     # Create composite key
     mutate(key_of = paste(game_str, play_id, timestamp, player_position, sep = "_")) %>%
