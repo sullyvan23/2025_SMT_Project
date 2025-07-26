@@ -7,6 +7,8 @@ game_events_field <- game_events %>%
                (lag(player_position) == 255 & lag(event_code) == 16)) %>%
     ungroup()
 
+
+# Collecting plays with a runner on 2nd
 run_on_2nd <- game_info %>% 
     filter(!is.na(second_baserunner))
 
@@ -30,11 +32,15 @@ run2nd_pos <- run2nd_pos %>% rename(run_y = field_y)
 game_events_field <- game_events_field %>%
     mutate(key_run = paste(game_str, play_id, timestamp, sep = "_"))
 
+
+# Joining to get plays where runner on 1st and outfielder fields the ball
 messy_stats <- full_join(game_events_field, run2nd_pos[,4:7], by = "key_run")
 
 messy_stats <- messy_stats %>%
     filter(!is.na(runner))
 
+
+# Getting outfielder and runner positions when the ball is fielded
 run2nd_OF_pos <- player_pos %>%
     # Create composite key
     mutate(key_of = paste(game_str, play_id, timestamp, player_position, sep = "_")) %>%
