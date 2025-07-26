@@ -1,4 +1,4 @@
-# Collects all outfielders acquiring ball after it’s hit something
+# Collecing plays where outfielder acquiring ball after it’s hit something
 game_events_field_1st <- game_events %>%
     group_by(game_str, play_id) %>%
     # Looking for outfielder acquiring the ball
