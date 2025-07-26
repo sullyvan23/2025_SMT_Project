@@ -6,6 +6,9 @@ game_events_field_1st <- game_events %>%
                # Where the play before the ball hit the ground / deflected
                (lag(player_position) == 255 & (lag(event_code) == 16 | lag(event_code) == 9 | lag(event_code) == 10))) %>%
     ungroup()
+
+
+# Collecting plays with a runner on 1st
 run_on_1st <- game_info %>% 
     filter(!is.na(first_baserunner))
 run1st_pos <- player_pos %>%
@@ -27,10 +30,16 @@ run1st_pos <- run1st_pos %>% rename(run_y = field_y)
 
 game_events_field_1st <- game_events_field_1st %>%
     mutate(key_run = paste(game_str, play_id, timestamp, sep = "_"))
+
+
+# Combining runner on 1st and outfielder fielding ball to get the plays where both happened
 messy_stats_1st <- full_join(game_events_field_1st, run1st_pos[,4:7], by = "key_run")
 
 messy_stats_1st <- messy_stats_1st %>%
     filter(!is.na(runner))
+
+
+# Getting positions of outfielder and runner at the time the ball is fielded
 run1st_OF_pos <- player_pos %>%
     # Create composite key
     mutate(key_of = paste(game_str, play_id, timestamp, player_position, sep = "_")) %>%
