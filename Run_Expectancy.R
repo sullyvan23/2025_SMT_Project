@@ -12,6 +12,7 @@ schedule <- mlb_schedule(season = 2021,
 
 game_ids <- unique(schedule$game_pk)
 
+# Getting all MiLB game data from 2021 with progress bar so I could actually see how long it was taking (it took a while)
 with_progress({
     p <- progressor(along = game_ids)
     
@@ -22,6 +23,7 @@ with_progress({
         bind_rows()
 })
 
+# Selecting necessary columns
 pbp_data <- pbp %>%
     dplyr::select(game_pk, atBatIndex, result.awayScore, result.homeScore, count.outs.start, about.inning, about.halfInning, matchup.postOnFirst.fullName, matchup.postOnSecond.fullName, matchup.postOnThird.fullName)
 
@@ -31,6 +33,8 @@ pbp_data <- pbp_data %>%
 pbp_data_ordered <- pbp_data %>%
     arrange(inning_key, atBatIndex)
 
+
+# Getting run information needed
 pbp_data_ordered <- pbp_data_ordered %>%
     mutate(current_runs = ifelse(about.halfInning == "top", result.awayScore, result.homeScore))
 
@@ -44,6 +48,8 @@ pbp_data_ordered <- pbp_data_ordered %>%
 pbp_data_ordered <- pbp_data_ordered %>%
     distinct(inning_key, atBatIndex, .keep_all = TRUE)
 
+
+# Getting baserunner and out data
 pbp_data_ordered <- pbp_data_ordered %>%
     mutate(baserunners = paste( ifelse(!is.na(matchup.postOnFirst.fullName), 1, "_"), ifelse(!is.na(matchup.postOnSecond.fullName), 2, "_"), ifelse(!is.na(matchup.postOnThird.fullName), 3, "_") , sep = "") )
 
@@ -59,6 +65,7 @@ run_expectancy <- data.frame(situation = c(
     "2 ___", "2 1__", "2 _2_", "2 __3", "2 12_", "2 1_3", "2 _23", "2 123",            
     "3 ___", "3 1__", "3 _2_", "3 __3", "3 12_", "3 1_3", "3 _23", "3 123"))
 
+# Getting run expectancies
 RE_avgs <- pbp_data_ordered %>%
     group_by(situation) %>%
     summarize(RE = mean(runs_yet_to_score))
