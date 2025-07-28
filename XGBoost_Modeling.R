@@ -1,3 +1,5 @@
+# Made random grids of multiple different hyperparameters at a time in hopes of finding the optimal values
+
 random_grid <- tibble(
   nrounds = sample(20:1000, 100, replace = TRUE),
   early_stopping_rounds = sample(1:20, 100, replace = TRUE),
@@ -5,7 +7,7 @@ random_grid <- tibble(
 )
 
 results <- data.frame()
-
+# 100 tests of different paramaters for variables in random grid above and measure logloss for each to see what is optimal
 for (i in 1:100) {
 
   strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
@@ -55,6 +57,8 @@ cor(results$early_stopping_rounds, results$logloss)
 [1] -0.0002065106
 
 ggplot(results, aes(x = nrounds, y = eta, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
+
+#################################################################################################################################################
 
 random_grid <- tibble(
   nrounds = sample(10:500, 100, replace = TRUE),
@@ -113,6 +117,8 @@ cor(results$early_stopping_rounds, results$logloss)
 [1] 0.1013682
 
 ggplot(results %>% filter(logloss < 0.3), aes(x = nrounds, y = eta, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
+
+#################################################################################################################################################
 
 random_grid <- tibble(
   max_depth = sample(1:5, 100, replace = TRUE),
@@ -182,8 +188,9 @@ cor(results$lambda, results$logloss)
 > cor(results$lambda, results$logloss)
 [1] 0.1175086
 
-
 ggplot(results), aes(x = gamma, y = alpha, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
+
+#################################################################################################################################################
 
 random_grid <- tibble(
   max_depth = sample(1:5, 100, replace = TRUE),
@@ -247,6 +254,7 @@ ggplot(results, aes(x = max_depth, y = min_child_weight, color = logloss)) + geo
 ggplot(results %>% filter(logloss < 0.18), aes(x = max_depth, y = min_child_weight, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
 
 
+#################################################################################################################################################
 
 random_grid <- tibble(
   subsample = runif(100, 0.5, 1),
