@@ -1,5 +1,6 @@
 aw2_lda_results <- data.frame(test_num = integer(), logloss = numeric())
 
+# Doing 100 tests of 10-fold stratified cross validation with logloss of predicted probabilties vs score_chance for LDA
 for (i in 1:100) {
 
   strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
@@ -26,12 +27,15 @@ for (i in 1:100) {
 mean(aw2_lda_results$logloss)
 sd(aw2_lda_results$logloss)
 
-> mean(aw2_lda_results$logloss)
-[1] 0.1680457
-> sd(aw2_lda_results$logloss)
-[1] 0.002307353
-aw2_qda_results <- data.frame(test_num = integer(), logloss = numeric())
+# mean(aw2_lda_results$logloss)
+# 0.1680457
+# sd(aw2_lda_results$logloss)
+# 0.002307353
 
+################################################################################################################################
+
+aw2_qda_results <- data.frame(test_num = integer(), logloss = numeric())
+# Doing 100 tests of 10-fold stratified cross validation with logloss of predicted probabilties vs score_chance for QDA
 for (i in 1:100) {
 
   strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
@@ -58,7 +62,7 @@ for (i in 1:100) {
 mean(aw2_qda_results$logloss)
 sd(aw2_qda_results$logloss)
 
-> mean(aw2_qda_results$logloss)
-[1] 0.2620757
-> sd(aw2_qda_results$logloss)
-[1] 0.02060027
+# mean(aw2_qda_results$logloss)
+# 0.2620757
+# sd(aw2_qda_results$logloss)
+# 0.02060027
