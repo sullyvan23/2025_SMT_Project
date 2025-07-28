@@ -27,11 +27,14 @@ for (i in 1:100) {
 mean(aw2_rf_results$logloss)
 sd(aw2_rf_results$logloss)
 
-> mean(aw2_rf_results$logloss)
-[1] 0.1836057
-> sd(aw2_rf_results$logloss)
-[1] 0.01580887
+# mean(aw2_rf_results$logloss)
+# 0.1836057
+# sd(aw2_rf_results$logloss)
+# 0.01580887
 
+################################################################################################################################################
+
+# Testing varying number of rounds
 aw2_rf_results_2 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
@@ -60,10 +63,13 @@ for (i in 1:100) {
 mean(aw2_rf_results_2$logloss)
 sd(aw2_rf_results_2$logloss)
 
-> mean(aw2_rf_results_2$logloss)
-[1] 0.1775654
-> sd(aw2_rf_results_2$logloss)
-[1] 0.0110374
+# mean(aw2_rf_results_2$logloss)
+# 0.1775654
+# sd(aw2_rf_results_2$logloss)
+# 0.0110374
+
+################################################################################################################################################
+
 aw2_rf_results_3 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
@@ -92,7 +98,7 @@ for (i in 1:100) {
 mean(aw2_rf_results_3$logloss)
 sd(aw2_rf_results_3$logloss)
 
-> mean(aw2_rf_results_3$logloss)
-[1] 0.1770727
-> sd(aw2_rf_results_3$logloss)
-[1] 0.007046146
+# mean(aw2_rf_results_3$logloss)
+# 0.1770727
+# sd(aw2_rf_results_3$logloss)
+# 0.007046146
