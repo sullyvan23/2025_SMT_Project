@@ -1,5 +1,6 @@
 nvBayes_results <- data.frame(test_num = integer(), logloss = numeric())
 
+# Doing 100 tests of 10-fold stratified cross validation of Naive Bayes predicted safe probability vs score_chance
 for (i in 1:100) {
 
   strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
@@ -26,7 +27,7 @@ for (i in 1:100) {
 mean(nvBayes_results$logloss)
 sd(nvBayes_results$logloss)
 
-> mean(nvBayes_results$logloss)
-[1] 0.2061259
-> sd(nvBayes_results$logloss)
-[1] 0.008316792
+# mean(nvBayes_results$logloss)
+# 0.2061259
+# sd(nvBayes_results$logloss)
+# 0.008316792
