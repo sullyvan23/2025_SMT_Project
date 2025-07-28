@@ -1,5 +1,6 @@
 aw2_rf_results <- data.frame(test_num = integer(), logloss = numeric())
 
+# Doing 100 tests of 10-fold stratified cross validation of random forest predicted safe probability vs score_chance
 for (i in 1:100) {
 
   strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
