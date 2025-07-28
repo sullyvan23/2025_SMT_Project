@@ -6,6 +6,8 @@ final_2nd_data <- final_2nd_data %>%
 
 all_final_data <- rbind(final_1st_data, final_2nd_data)
 
+
+# Found some plays that in data that involved overthrows and not balls and didn't want those filtered them out
 ball_hit <- game_events %>%
     # Create composite key
     mutate(play_key = paste(game_str, play_id, sep = "_")) %>%
@@ -22,5 +24,7 @@ all_final_data <- all_final_data %>%
 
 all_final_data <- all_final_data[,1:11]
 
+
+# Making dataframe of only plays where the runner went home
 all_went_data <- all_final_data %>%
     filter(!is.na(safe_out))
