@@ -1,6 +1,6 @@
 aw2_lda_results <- data.frame(test_num = integer(), logloss = numeric())
 
-# Doing 100 tests of 10-fold stratified cross validation with logloss of predicted probabilties vs score_chance for LDA
+# Doing 100 tests of 10-fold stratified cross validation of LDA predicted safe probability vs score_chance
 for (i in 1:100) {
 
   strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
@@ -35,7 +35,8 @@ sd(aw2_lda_results$logloss)
 ################################################################################################################################
 
 aw2_qda_results <- data.frame(test_num = integer(), logloss = numeric())
-# Doing 100 tests of 10-fold stratified cross validation with logloss of predicted probabilties vs score_chance for QDA
+
+# Doing 100 tests of 10-fold stratified cross validation of QDA predicted safe probability vs score_chance
 for (i in 1:100) {
 
   strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
