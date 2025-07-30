@@ -1,3 +1,5 @@
+library(dplyr)
+
 # Getting runner position ~0.5 seconds back (500 for plays where they go by 50 to 100, 495 for plays where they go by 33)
 run1st_lag_pos <- player_pos %>%
     # Create composite key
