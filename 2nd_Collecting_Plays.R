@@ -1,3 +1,5 @@
+library(dplyr)
+
 # Collecing plays where outfielder acquiring ball after it’s hit ground
 game_events_field <- game_events %>%
     group_by(game_str, play_id) %>%
