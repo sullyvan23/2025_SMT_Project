@@ -12,7 +12,7 @@ results <- data.frame()
 # 100 tests of different paramaters for variables in random grid above and measure logloss for each to see what is optimal
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   params <- list(
     booster = "gbtree",
@@ -24,12 +24,12 @@ for (i in 1:100) {
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
   xgb <- xgboost(
     params = params,
-    data = as.matrix(all_went_data[-fold, 2:7]),
-    label = all_went_data[-fold, ]$def_safe,
+    data = as.matrix(all_went_data_2[-fold, 2:7]),
+    label = all_went_data_2[-fold, ]$def_safe,
     nrounds = random_grid$nrounds[i],
     early_stopping_rounds = random_grid$early_stopping_rounds[i],
     verbose = 0
@@ -72,7 +72,7 @@ results <- data.frame()
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   params <- list(
     booster = "gbtree",
@@ -84,12 +84,12 @@ for (i in 1:100) {
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
   xgb <- xgboost(
     params = params,
-    data = as.matrix(all_went_data[-fold, 2:7]),
-    label = all_went_data[-fold, ]$def_safe,
+    data = as.matrix(all_went_data_2[-fold, 2:7]),
+    label = all_went_data_2[-fold, ]$def_safe,
     nrounds = random_grid$nrounds[i],
     early_stopping_rounds = random_grid$early_stopping_rounds[i],
     verbose = 0
@@ -134,7 +134,7 @@ results <- data.frame()
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   params <- list(
     booster = "gbtree",
@@ -150,12 +150,12 @@ for (i in 1:100) {
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
   xgb <- xgboost(
     params = params,
-    data = as.matrix(all_went_data[-fold, 2:7]),
-    label = all_went_data[-fold, ]$def_safe,
+    data = as.matrix(all_went_data_2[-fold, 2:7]),
+    label = all_went_data_2[-fold, ]$def_safe,
     nrounds = 225,
     eta = 0.03,
     verbose = 0
@@ -203,7 +203,7 @@ results <- data.frame()
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   params <- list(
     booster = "gbtree",
@@ -218,12 +218,12 @@ for (i in 1:100) {
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
   xgb <- xgboost(
     params = params,
-    data = as.matrix(all_went_data[-fold, 2:7]),
-    label = all_went_data[-fold, ]$def_safe,
+    data = as.matrix(all_went_data_2[-fold, 2:7]),
+    label = all_went_data_2[-fold, ]$def_safe,
     nrounds = 225,
     eta = 0.03,
     verbose = 0
@@ -267,7 +267,7 @@ results <- data.frame()
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   params <- list(
     booster = "gbtree",
@@ -280,12 +280,12 @@ for (i in 1:100) {
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
   xgb <- xgboost(
     params = params,
-    data = as.matrix(all_went_data[-fold, 2:7]),
-    label = all_went_data[-fold, ]$def_safe,
+    data = as.matrix(all_went_data_2[-fold, 2:7]),
+    label = all_went_data_2[-fold, ]$def_safe,
     nrounds = 225,
     eta = 0.03,
     max_depth = 2,
@@ -318,16 +318,16 @@ xgb_results <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
   xgb <- xgboost(
-    data = as.matrix(all_went_data[-fold, ][,2:7]),
-    label = all_went_data[-fold, ]$def_safe,
+    data = as.matrix(all_went_data_2[-fold, ][,2:7]),
+    label = all_went_data_2[-fold, ]$def_safe,
     objective = "binary:logistic",
     eval_metric = "logloss",
     nrounds = 225,
