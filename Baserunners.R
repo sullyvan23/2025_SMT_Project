@@ -1,3 +1,5 @@
+library(dplyr)
+
 # Using player position to determine baserunners because of innaccuracies in game_info
 baserunner_data <- player_pos %>%
     # Create composite key
