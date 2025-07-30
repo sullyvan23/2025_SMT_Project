@@ -1,5 +1,7 @@
-# Made random grids of multiple different hyperparameters at a time in hopes of finding the optimal values
+library(dplyr)
+library(xgboost)
 
+# Made random grids of multiple different hyperparameters at a time in hopes of finding the optimal values
 random_grid <- tibble(
   nrounds = sample(20:1000, 100, replace = TRUE),
   early_stopping_rounds = sample(1:20, 100, replace = TRUE),
