@@ -1,3 +1,5 @@
+library(dplyr)
+
 game_info_2 <- game_info %>%
     mutate(ppg_key = paste(game_str, play_per_game, sep = "_"))
 
