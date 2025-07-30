@@ -1,3 +1,5 @@
+library(dplyr)
+
 # Stay and go runner situations were determined from what actually were the baserunners the next play and watching plays where it could not be determined
 
 all_final_data_4 <- all_final_data_4 %>%
