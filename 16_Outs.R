@@ -30,6 +30,6 @@ all_final_data_4 <- left_join(all_final_data_3, out_info[,7:8], by = "play_key")
 all_final_data_4 <- all_final_data_4 %>%
     mutate(outs = ifelse(is.na(outs), 1, outs))
 
-# sum(all_final_data_4$outs)
+sum(all_final_data_4$outs)
 # 1323
 # Average of about 1.235 outs, makes sense since runners on base likely later in inning
