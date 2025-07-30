@@ -17,16 +17,16 @@ all_went_data_scaled[,2:7] <- scale(all_went_data_scaled[,2:7])
 scaled_final_model <- glm(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data_scaled, family = binomial)
 
 coef(scaled_final_model)
-    (Intercept)         run_dist          OF_dist        run_speed        top_speed 
-       5.0617794       -3.6093396        1.9650246        0.3470706        0.1083703 
-OF_momentum_home OF_momentum_side 
-      -0.7371754        0.2937933
+#     (Intercept)         run_dist          OF_dist        run_speed        top_speed 
+#        5.0617794       -3.6093396        1.9650246        0.3470706        0.1083703 
+# OF_momentum_home OF_momentum_side 
+#       -0.7371754        0.2937933
 
 exp(coef(final_glm_model))
-     (Intercept)         run_dist          OF_dist        run_speed        top_speed 
-       0.9920972        0.8809916        1.0393174        1.1359548        1.0546463 
-OF_momentum_home OF_momentum_side 
-       0.9348720        1.0547978
+#      (Intercept)         run_dist          OF_dist        run_speed        top_speed 
+#        0.9920972        0.8809916        1.0393174        1.1359548        1.0546463 
+# OF_momentum_home OF_momentum_side 
+#        0.9348720        1.0547978
 
 
 # Seeing if they should've gone based off prob_to_gp
@@ -118,35 +118,35 @@ all_final_data_scaled[,c(2:7,23)] <- scale(all_final_data_6[,c(2:7,23)])
 scaled_should_go <- glm(should_go ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + prob_to_go, data = all_final_data_scaled, family = binomial)
 
 coef(scaled_should_go)
-    (Intercept)         run_dist          OF_dist        run_speed        top_speed 
-        91.77071       -607.70968        229.73608         63.50010         15.78930 
-OF_momentum_home OF_momentum_side       prob_to_go 
-       -93.98406         34.02201        -65.48629
+#     (Intercept)         run_dist          OF_dist        run_speed        top_speed 
+#         91.77071       -607.70968        229.73608         63.50010         15.78930 
+# OF_momentum_home OF_momentum_side       prob_to_go 
+#        -93.98406         34.02201        -65.48629
 
 sd(coef(scaled_should_go))
-[1] 249.3603
+# 249.3603
 
 # Need to divide by standard deviation to be able to compare both models
 coef(scaled_should_go) / sd(coef(scaled_should_go))
-     (Intercept)         run_dist          OF_dist        run_speed        top_speed 
-      0.36802447      -2.43707432       0.92130159       0.25465196       0.06331921 
-OF_momentum_home OF_momentum_side       prob_to_go 
-     -0.37690058       0.13643715      -0.26261709
+#      (Intercept)         run_dist          OF_dist        run_speed        top_speed 
+#       0.36802447      -2.43707432       0.92130159       0.25465196       0.06331921 
+# OF_momentum_home OF_momentum_side       prob_to_go 
+#      -0.37690058       0.13643715      -0.26261709
 
 
 scaled_went <- glm(went_home ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + prob_to_go, data = all_final_data_scaled, family = binomial)
 
 coef(scaled_went)
-    (Intercept)         run_dist          OF_dist        run_speed        top_speed 
-       0.5945561       -6.8326076        2.8662002        0.4321529        1.2093262 
-OF_momentum_home OF_momentum_side       prob_to_go 
-      -0.5698051        0.2780468        0.1450003
+#     (Intercept)         run_dist          OF_dist        run_speed        top_speed 
+#        0.5945561       -6.8326076        2.8662002        0.4321529        1.2093262 
+# OF_momentum_home OF_momentum_side       prob_to_go 
+#       -0.5698051        0.2780468        0.1450003
 
 sd(coef(scaled_went))
-[1] 2.850687
+# 2.850687
 
 coef(scaled_went) / sd(coef(scaled_went))
-     (Intercept)         run_dist          OF_dist        run_speed        top_speed 
-      0.20856591      -2.39682843       1.00544192       0.15159605       0.42422273 
-OF_momentum_home OF_momentum_side       prob_to_go 
-     -0.19988342       0.09753675       0.05086505
+#      (Intercept)         run_dist          OF_dist        run_speed        top_speed 
+#       0.20856591      -2.39682843       1.00544192       0.15159605       0.42422273 
+# OF_momentum_home OF_momentum_side       prob_to_go 
+#      -0.19988342       0.09753675       0.05086505
