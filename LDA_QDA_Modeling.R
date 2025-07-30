@@ -1,3 +1,6 @@
+library(dplyr)
+library(MASS)
+
 aw2_lda_results <- data.frame(test_num = integer(), logloss = numeric())
 
 # Doing 100 tests of 10-fold stratified cross validation of LDA predicted safe probability vs score_chance
