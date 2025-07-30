@@ -1,3 +1,5 @@
+library(dplyr)
+
 final_2nd_stats <- final_2nd_stats %>%
     mutate(play_key = paste(game_str, play_id, sep = "_")) %>%
     relocate(play_key, .after = play_id)
