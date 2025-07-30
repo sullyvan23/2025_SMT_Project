@@ -1,3 +1,6 @@
+library(dplyr)
+library(e1071)
+
 nvBayes_results <- data.frame(test_num = integer(), logloss = numeric())
 
 # Doing 100 tests of 10-fold stratified cross validation of naive bayes predicted safe probability vs score_chance
