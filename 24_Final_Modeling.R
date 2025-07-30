@@ -6,11 +6,10 @@ final_glm_model <- glm(def_safe ~ run_dist + OF_dist + run_speed + top_speed + O
 # Predicting on all data with model
 all_final_data_5$glm_safe <- predict(final_glm_model, newdata = all_final_data_5, type = "response")
 
-
 all_final_data_5 <- all_final_data_5[,c(-24)] %>%
     relocate(glm_safe, .after = prob_to_go)
 
-# Scaling data tp get comparable coefficient values for variables used in model
+# Scaling data to get comparable coefficient values for variables used in model
 all_went_data_scaled <- all_went_data_2
 
 all_went_data_scaled[,2:7] <- scale(all_went_data_scaled[,2:7])
