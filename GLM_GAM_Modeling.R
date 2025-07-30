@@ -1,3 +1,5 @@
+library(dplyr)
+
 # Testing bunch of different combinations with logistic regression model
 ds_gam_results <- data.frame(test_num = integer(), logloss = numeric())
 # Doiung 100 tests for each model
