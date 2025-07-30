@@ -1,3 +1,5 @@
+library(dplyr)
+
 messy_stats <- messy_stats %>%
     mutate(run_dist = ifelse( (run_x > 0 | run_y < 0) ,                                             # if runner has already reached home
         0 ,                                                                                         # distance is 0
