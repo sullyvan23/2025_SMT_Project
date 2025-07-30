@@ -1,3 +1,5 @@
+library(dplyr)
+
 final_1st_data <- final_1st_data %>%
     mutate(scoring_from = 1)
 
