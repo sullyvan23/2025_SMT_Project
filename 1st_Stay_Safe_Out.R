@@ -1,3 +1,5 @@
+library(dplyr)
+
 messy_stats_1st <- messy_stats_1st %>%
     mutate(play_key = paste(game_str, play_id, sep = "_"))
 
