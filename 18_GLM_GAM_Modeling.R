@@ -5,15 +5,15 @@ ds_gam_results <- data.frame(test_num = integer(), logloss = numeric())
 # Doiung 100 tests for each model
 for (i in 1:100) {
   # Creating 10 statified folds of went data based off def_safe
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   # looping through all combinations of 9 train folds and 1 test fold
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
     # Model used for test
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data_2[-fold, ], family = binomial)
     # Finding log loss between predicted probability and score_chance
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -41,14 +41,14 @@ ds_gam_results_2 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ s(run_dist) + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ s(run_dist) + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -76,14 +76,14 @@ ds_gam_results_3 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + s(OF_dist) + run_speed + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + s(OF_dist) + run_speed + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -111,14 +111,14 @@ ds_gam_results_4 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + s(run_speed) + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + s(run_speed) + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -146,14 +146,14 @@ ds_gam_results_5 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + s(top_speed) + OF_momentum_home + OF_momentum_side, data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + s(top_speed) + OF_momentum_home + OF_momentum_side, data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -181,14 +181,14 @@ ds_gam_results_6 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + s(OF_momentum_home) + OF_momentum_side, data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + s(OF_momentum_home) + OF_momentum_side, data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -216,14 +216,14 @@ ds_gam_results_7 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + s(OF_momentum_side), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + s(OF_momentum_side), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -251,14 +251,14 @@ ds_gam_results_8 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:OF_dist), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:OF_dist), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -286,14 +286,14 @@ ds_gam_results_9 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + ti(run_dist, OF_dist), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + ti(run_dist, OF_dist), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -321,14 +321,14 @@ ds_gam_results_10 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_speed:top_speed), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_speed:top_speed), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -356,14 +356,14 @@ ds_gam_results_11 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + ti(run_speed, top_speed), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + ti(run_speed, top_speed), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -391,14 +391,14 @@ ds_gam_results_12 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -426,14 +426,14 @@ ds_gam_results_13 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (OF_dist:OF_momentum_home), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (OF_dist:OF_momentum_home), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -461,14 +461,14 @@ ds_gam_results_14 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (OF_momentum_home:OF_momentum_side), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (OF_momentum_home:OF_momentum_side), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -496,14 +496,14 @@ ds_gam_results_15 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (OF_dist:OF_momentum_home:OF_momentum_side), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (OF_dist:OF_momentum_home:OF_momentum_side), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -531,14 +531,14 @@ ds_gam_results_16 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -566,14 +566,14 @@ ds_gam_results_17 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + s(OF_dist) + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + s(OF_dist) + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -601,14 +601,14 @@ ds_gam_results_18 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ s(run_dist) + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ s(run_dist) + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -636,14 +636,14 @@ ds_gam_results_19 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + s(run_speed) + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + s(run_speed) + top_speed + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -671,14 +671,14 @@ ds_gam_results_20 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + s(top_speed) + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + s(top_speed) + OF_momentum_home + OF_momentum_side + (run_dist:run_speed:top_speed), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -706,14 +706,14 @@ ds_gam_results_21 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + (run_speed * top_speed) + (OF_momentum_home * OF_momentum_side), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + (run_speed * top_speed) + (OF_momentum_home * OF_momentum_side), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -741,14 +741,14 @@ ds_gam_results_22 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + (run_speed * top_speed) + (OF_momentum_home * OF_momentum_side), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + (run_speed * top_speed) + (OF_momentum_home * OF_momentum_side), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -776,14 +776,14 @@ ds_gam_results_23 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side, data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -811,14 +811,14 @@ ds_gam_results_24 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ (run_dist * run_speed * top_speed) + (OF_dist * OF_momentum_home * OF_momentum_side), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ (run_dist * run_speed * top_speed) + (OF_dist * OF_momentum_home * OF_momentum_side), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -846,14 +846,14 @@ ds_gam_results_25 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ s(run_dist) + s(OF_dist) + (run_speed * top_speed) + (OF_momentum_home * OF_momentum_side), data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ s(run_dist) + s(OF_dist) + (run_speed * top_speed) + (OF_momentum_home * OF_momentum_side), data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
@@ -877,21 +877,21 @@ sd(ds_gam_results_25$logloss)
 
 ################################################################################################################################################################
 # Tried something with combining run_speed and top_speed into one stat, didn't really do anything
-pca_speed <- prcomp(all_went_data[, c("run_speed", "top_speed")], scale. = TRUE)
-all_went_data$pca_speed <- pca_speed$x[, 1]
+pca_speed <- prcomp(all_went_data_2[, c("run_speed", "top_speed")], scale. = TRUE)
+all_went_data_2$pca_speed <- pca_speed$x[, 1]
 
 ds_gam_results_26 <- data.frame(test_num = integer(), logloss = numeric())
 
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data_2$def_safe, k = 5, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data[fold, ]
+    test_data <- all_went_data_2[fold, ]
 
-    gam <- gam(def_safe ~ run_dist + OF_dist + pca_speed + OF_momentum_home + OF_momentum_side, data = all_went_data[-fold, ], family = binomial)
+    gam <- gam(def_safe ~ run_dist + OF_dist + pca_speed + OF_momentum_home + OF_momentum_side, data = all_went_data_2[-fold, ], family = binomial)
 
     test_probs <- predict(gam, newdata = test_data, type = "response")
 
