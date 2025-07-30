@@ -1,6 +1,5 @@
-install.packages("baseballr")
+library(dplyr)
 library(baseballr)
-
 library(purrr)
 library(progressr)
 
