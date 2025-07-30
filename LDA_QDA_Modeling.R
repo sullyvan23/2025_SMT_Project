@@ -3,14 +3,14 @@ aw2_lda_results <- data.frame(test_num = integer(), logloss = numeric())
 # Doing 100 tests of 10-fold stratified cross validation of LDA predicted safe probability vs score_chance
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data_2[fold, ]
+    test_data <- all_went_data[fold, ]
 
-    lda <- lda(all_went_data_2[-fold, 2:7], grouping = all_went_data_2[-fold, ]$def_safe)
+    lda <- lda(all_went_data[-fold, 2:7], grouping = all_went_data[-fold, ]$def_safe)
 
     test_probs <- predict(lda, test_data[, 2:7])$posterior[, 2]
 
@@ -39,14 +39,14 @@ aw2_qda_results <- data.frame(test_num = integer(), logloss = numeric())
 # Doing 100 tests of 10-fold stratified cross validation of QDA predicted safe probability vs score_chance
 for (i in 1:100) {
 
-  strat_folds <- createFolds(all_went_data_2$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
+  strat_folds <- createFolds(all_went_data$def_safe, k = 10, list = TRUE, returnTrain = FALSE)
 
   tests_log_losses <- c()
 
   for (fold in strat_folds) {
-    test_data <- all_went_data_2[fold, ]
+    test_data <- all_went_data[fold, ]
 
-    qda <- qda(all_went_data_2[-fold, 2:7], grouping = all_went_data_2[-fold, ]$def_safe)
+    qda <- qda(all_went_data[-fold, 2:7], grouping = all_went_data[-fold, ]$def_safe)
 
     test_probs <- predict(qda, test_data[, 2:7])$posterior[, 2]
 
