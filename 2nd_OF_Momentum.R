@@ -1,3 +1,5 @@
+library(dplyr)
+
 # Getting position of outfielder ~0.5 seconds before they acquire the ball
 messy_stats <- messy_stats %>%
     mutate(lag_key_of = paste(game_str, play_id, lag_timestamp, player_position, sep = "_"))
