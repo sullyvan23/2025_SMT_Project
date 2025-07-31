@@ -28,6 +28,31 @@ exp(coef(final_glm_model))
 # OF_momentum_home OF_momentum_side 
 #        0.9348720        1.0547978
 
+# Using these odd differences, we can calculate what the new probability would be if each variable went up by one unit from a 50/50 safe or out play
+exp(coef(final_glm_model)["run_dist"]) / (1 + exp(coef(final_glm_model)["run_dist"]))
+#  run_dist 
+# 0.4683655 
+
+exp(coef(final_glm_model)["OF_dist"]) / (1 + exp(coef(final_glm_model)["OF_dist"]))
+#   OF_dist 
+# 0.5096398
+
+exp(coef(final_glm_model)["run_speed"]) / (1 + exp(coef(final_glm_model)["run_speed"]))
+# run_speed 
+# 0.5318253
+
+exp(coef(final_glm_model)["top_speed"]) / (1 + exp(coef(final_glm_model)["top_speed"]))
+# top_speed 
+# 0.5132982
+
+exp(coef(final_glm_model)["OF_momentum_home"]) / (1 + exp(coef(final_glm_model)["OF_momentum_home"]))
+# OF_momentum_home 
+#        0.4831699
+
+exp(coef(final_glm_model)["OF_momentum_side"]) / (1 + exp(coef(final_glm_model)["OF_momentum_side"]))
+# OF_momentum_side 
+#        0.5133341
+
 
 # Seeing if they should've gone based off prob_to_gp
 all_final_data_5 <- all_final_data_5 %>%
@@ -44,7 +69,6 @@ print(confusion_matrix)
 # Predicted   0   1
 #         0 449  36
 #         1  56 524
-
 
 # Seeing how each third base coach did for all the major 3 teams used in dataset
 team_info <- team_info %>%
@@ -68,8 +92,28 @@ all_final_data_6 <- left_join(all_final_data_5, team_info[,5:6], by = "play_key"
 all_final_data_6 <- all_final_data_6 %>%
     mutate(RE_diff = ((glm_safe * go_safe_RE) + ((1 - glm_safe) * go_out_RE)) - stay_RE )
 
+# average run expectancy lost per decision
 mean(abs(ifelse(all_final_data_6$correct_decision == 0, abs(all_final_data_6$RE_diff), 0)))
 # 0.01653246
+
+100 * mean(abs(ifelse(all_final_data_6$correct_decision == 0, abs(all_final_data_6$RE_diff), 0)))
+# 1.653246
+
+
+# average run expectancy lost per decision where they should send a runner home
+sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_go == 1, abs(all_final_data_6$RE_diff), 0))) / sum(ifelse(all_final_data_6$should_go == 1, 1, 0))
+#  0.0179932
+
+100 * sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_go == 1, abs(all_final_data_6$RE_diff), 0))) / sum(ifelse(all_final_data_6$should_go == 1, 1, 0))
+# 1.79932
+
+
+# average run expectancy lost per decision where they should keep the runner at third
+sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_go == 0, abs(all_final_data_6$RE_diff), 0))) / sum(ifelse(all_final_data_6$should_go == 0, 1, 0))
+# 0.0147856
+
+100 * sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_go == 0, abs(all_final_data_6$RE_diff), 0))) / sum(ifelse(all_final_data_6$should_go == 0, 1, 0))
+# 1.47856
 
 QEA_final_data <- all_final_data_6 %>%
     filter(team == "QEA")
