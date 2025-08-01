@@ -115,6 +115,8 @@ sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_
 100 * sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_go == 0, abs(all_final_data_6$RE_diff), 0))) / sum(ifelse(all_final_data_6$should_go == 0, 1, 0))
 # 1.47856
 
+##########################################################################################################################################
+
 QEA_final_data <- all_final_data_6 %>%
     filter(team == "QEA")
 QEA_confusion_matrix <- table(Predicted = QEA_final_data$should_go, Actual = QEA_final_data$went_home)
@@ -124,9 +126,19 @@ print(QEA_confusion_matrix)
 #         0 20  5
 #         1  6 40
 
-mean(abs(ifelse(QEA_final_data$correct_decision == 0, abs(QEA_final_data$RE_diff), 0)))
-# 0.01545368
+mean(QEA_final_data$correct_decision)
+# 0.8450704
 
+100 * mean(abs(ifelse(QEA_final_data$correct_decision == 0, abs(QEA_final_data$RE_diff), 0)))
+# 1.545368
+
+100 * sum(abs(ifelse(QEA_final_data$correct_decision == 0 & QEA_final_data$should_go == 1, abs(QEA_final_data$RE_diff), 0))) / sum(ifelse(QEA_final_data$should_go == 1, 1, 0))
+# 1.572245
+
+100 * sum(abs(ifelse(QEA_final_data$correct_decision == 0 & QEA_final_data$should_go == 0, abs(QEA_final_data$RE_diff), 0))) / sum(ifelse(QEA_final_data$should_go == 0, 1, 0))
+# 1.495914
+
+##########################################################################################################################################
 
 RZQ_final_data <- all_final_data_6 %>%
     filter(team == "RZQ")
@@ -137,9 +149,19 @@ print(RZQ_confusion_matrix)
 #         0  95   6
 #         1   9 107
 
-mean(abs(ifelse(RZQ_final_data$correct_decision == 0, abs(RZQ_final_data$RE_diff), 0)))
-# 0.01477362
+mean(RZQ_final_data$correct_decision)
+# 0.9308756
 
+100 * mean(abs(ifelse(RZQ_final_data$correct_decision == 0, abs(RZQ_final_data$RE_diff), 0)))
+# 1.477362
+
+100 * sum(abs(ifelse(RZQ_final_data$correct_decision == 0 & RZQ_final_data$should_go == 1, abs(RZQ_final_data$RE_diff), 0))) / sum(ifelse(RZQ_final_data$should_go == 1, 1, 0))
+# 1.810925
+
+100 * sum(abs(ifelse(RZQ_final_data$correct_decision == 0 & RZQ_final_data$should_go == 0, abs(RZQ_final_data$RE_diff), 0))) / sum(ifelse(RZQ_final_data$should_go == 0, 1, 0))
+# 1.09426
+
+##########################################################################################################################################
 
 YJD_final_data <- all_final_data_6 %>%
     filter(team == "YJD")
@@ -150,9 +172,19 @@ print(YJD_confusion_matrix)
 #         0 77  6
 #         1 12 97
 
-mean(abs(ifelse(YJD_final_data$correct_decision == 0, abs(YJD_final_data$RE_diff), 0)))
-# 0.01508011
+mean(YJD_final_data$correct_decision)
+# 0.90625
 
+100 * mean(abs(ifelse(YJD_final_data$correct_decision == 0, abs(YJD_final_data$RE_diff), 0)))
+# 1.508011
+
+100 * sum(abs(ifelse(YJD_final_data$correct_decision == 0 & YJD_final_data$should_go == 1, abs(YJD_final_data$RE_diff), 0))) / sum(ifelse(YJD_final_data$should_go == 1, 1, 0))
+# 1.924894
+
+100 * sum(abs(ifelse(YJD_final_data$correct_decision == 0 & YJD_final_data$should_go == 0, abs(YJD_final_data$RE_diff), 0))) / sum(ifelse(YJD_final_data$should_go == 0, 1, 0))
+# 0.9605384
+
+##########################################################################################################################################
 
 # Getting coefficients, have to scale all the variabkles to get comparable coefficients
 all_final_data_scaled <- all_final_data_6
