@@ -1,6 +1,6 @@
 library(dplyr)
 
-# Stay and go runner situations were determined from what actually were the baserunners the next play and watching plays where it could not be determined
+# Stay and go runner situations were determined from what actually were the baserunners the next play and watching plays where it could not be determined, done in excel
 
 all_final_data_4 <- all_final_data_4 %>%
     mutate(go_safe = paste(outs, go_runners, sep = " "))
