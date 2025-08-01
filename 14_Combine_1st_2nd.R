@@ -19,6 +19,7 @@ ball_hit <- game_events %>%
     ) %>%
     collect()
 
+# Note you'll see all_final_data number up to all_final_data_6, this is because throughout I'd find some plays that had something wrong with or I wanted to keep files without certain columns to potentially go back to
 all_final_data <- full_join(all_final_data, ball_hit[,c(7,12)], by = "play_key")
 
 all_final_data <- all_final_data %>%
