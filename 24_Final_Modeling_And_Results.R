@@ -107,7 +107,6 @@ sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_
 100 * sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_go == 1, abs(all_final_data_6$RE_diff), 0))) / sum(ifelse(all_final_data_6$should_go == 1, 1, 0))
 # 1.79932
 
-
 # average run expectancy lost per decision where they should keep the runner at third
 sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_go == 0, abs(all_final_data_6$RE_diff), 0))) / sum(ifelse(all_final_data_6$should_go == 0, 1, 0))
 # 0.0147856
