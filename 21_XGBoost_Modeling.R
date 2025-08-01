@@ -55,7 +55,7 @@ cor(results$eta, results$logloss)
 cor(results$early_stopping_rounds, results$logloss)
 # -0.0002065106
 
-# Made graphs of log loss with combinations of variables, check XGBoost_Graphs.pdf
+# Made graphs of log loss with all combinations of variables from random grid to notice trends of what what combinations lead to lower log loss, check XGBoost_Graphs.pdf
 ggplot(results, aes(x = nrounds, y = eta, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
 
 #################################################################################################################################################
