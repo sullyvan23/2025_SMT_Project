@@ -47,17 +47,15 @@ for (i in 1:100) {
   results <- bind_rows(results, cbind(random_grid[i, ], logloss = avg_log_losses))
 }
 
+
 cor(results$nrounds, results$logloss)
+# 0.5393186
 cor(results$eta, results$logloss)
+# 0.6368334
 cor(results$early_stopping_rounds, results$logloss)
+# -0.0002065106
 
-> cor(results$nrounds, results$logloss)
-[1] 0.5393186
-> cor(results$eta, results$logloss)
-[1] 0.6368334
-> cor(results$early_stopping_rounds, results$logloss)
-[1] -0.0002065106
-
+# Made graphs of log loss with combinations of variables, check XGBoost_Graphs.pdf
 ggplot(results, aes(x = nrounds, y = eta, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
 
 #################################################################################################################################################
@@ -107,16 +105,13 @@ for (i in 1:100) {
   results <- bind_rows(results, cbind(random_grid[i, ], logloss = avg_log_losses))
 }
 
-cor(results$nrounds, results$logloss)
-cor(results$eta, results$logloss)
-cor(results$early_stopping_rounds, results$logloss)
 
-> cor(results$nrounds, results$logloss)
-[1] -0.2638771
-> cor(results$eta, results$logloss)
-[1] -0.2928961
-> cor(results$early_stopping_rounds, results$logloss)
-[1] 0.1013682
+cor(results$nrounds, results$logloss)
+# -0.2638771
+cor(results$eta, results$logloss)
+# -0.2928961
+cor(results$early_stopping_rounds, results$logloss)
+# 0.1013682
 
 ggplot(results %>% filter(logloss < 0.3), aes(x = nrounds, y = eta, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
 
@@ -174,21 +169,15 @@ for (i in 1:100) {
 }
 
 cor(results$max_depth, results$logloss)
+# -0.2866324
 cor(results$min_child_weight, results$logloss)
+# -0.09806205
 cor(results$gamma, results$logloss)
+# 0.6222763
 cor(results$alpha, results$logloss)
+# 0.5121492
 cor(results$lambda, results$logloss)
-
-> cor(results$max_depth, results$logloss)
-[1] -0.2866324
-> cor(results$min_child_weight, results$logloss)
-[1] -0.09806205
-> cor(results$gamma, results$logloss)
-[1] 0.6222763
-> cor(results$alpha, results$logloss)
-[1] 0.5121492
-> cor(results$lambda, results$logloss)
-[1] 0.1175086
+# 0.1175086
 
 ggplot(results), aes(x = gamma, y = alpha, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
 
@@ -242,12 +231,9 @@ for (i in 1:100) {
 }
 
 cor(results$max_depth, results$logloss)
+# 0.09833154
 cor(results$min_child_weight, results$logloss)
-
-> cor(results$max_depth, results$logloss)
-[1] 0.09833154
-> cor(results$min_child_weight, results$logloss)
-[1] -0.1587021
+# -0.1587021
 
 ggplot(results, aes(x = max_depth, y = min_child_weight, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
 
@@ -306,11 +292,9 @@ for (i in 1:100) {
 }
 
 cor(results$subsample, results$logloss)
+# -0.2047935
 cor(results$colsample_bytree, results$logloss)
-> cor(results$subsample, results$logloss)
-[1] -0.2047935
-> cor(results$colsample_bytree, results$logloss)
-[1] -0.4987488
+# -0.4987488
 
 ggplot(results, aes(x = subsample, y = colsample_bytree, color = logloss)) + geom_point() + scale_color_gradient(low = "green", high = "red")
 
@@ -351,9 +335,6 @@ for (i in 1:100) {
 }
 
 mean(xgb_results$logloss)
+# 0.1683589
 sd(xgb_results$logloss)
-
-> mean(xgb_results$logloss)
-[1] 0.1683589
-> sd(xgb_results$logloss)
-[1] 0.002628913
+# 0.002628913
