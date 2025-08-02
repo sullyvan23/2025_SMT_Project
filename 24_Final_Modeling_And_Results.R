@@ -118,6 +118,7 @@ sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_
 
 QEA_final_data <- all_final_data_6 %>%
     filter(team == "QEA")
+
 QEA_confusion_matrix <- table(Predicted = QEA_final_data$should_go, Actual = QEA_final_data$went_home)
 print(QEA_confusion_matrix)
 #         Actual
@@ -137,10 +138,24 @@ mean(QEA_final_data$correct_decision)
 100 * sum(abs(ifelse(QEA_final_data$correct_decision == 0 & QEA_final_data$should_go == 0, abs(QEA_final_data$RE_diff), 0))) / sum(ifelse(QEA_final_data$should_go == 0, 1, 0))
 # 1.495914
 
+# getting scaled coefficients for variables for QEA for comparision to the model
+QEA_scaled_data <- QEA_final_data
+
+QEA_scaled_data[,c(2:7,23)] <- scale(QEA_final_data[,c(2:7,23)])
+
+QEA_scaled_went <- glm(went_home ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + prob_to_go, data = QEA_scaled_data, family = binomial)
+
+coef(QEA_scaled_went) / sd(coef(QEA_scaled_went))
+#      (Intercept)         run_dist          OF_dist        run_speed        top_speed 
+#        0.6505161       -2.2743529        0.9386896        0.1780829        0.3269449 
+# OF_momentum_home OF_momentum_side       prob_to_go 
+#       -0.6006447       -0.2669381        0.2035740 
+
 ##########################################################################################################################################
 
 RZQ_final_data <- all_final_data_6 %>%
     filter(team == "RZQ")
+
 RZQ_confusion_matrix <- table(Predicted = RZQ_final_data$should_go, Actual = RZQ_final_data$went_home)
 print(RZQ_confusion_matrix)
 #         Actual
@@ -160,10 +175,23 @@ mean(RZQ_final_data$correct_decision)
 100 * sum(abs(ifelse(RZQ_final_data$correct_decision == 0 & RZQ_final_data$should_go == 0, abs(RZQ_final_data$RE_diff), 0))) / sum(ifelse(RZQ_final_data$should_go == 0, 1, 0))
 # 1.09426
 
+RZQ_scaled_data <- RZQ_final_data
+
+RZQ_scaled_data[,c(2:7,23)] <- scale(RZQ_final_data[,c(2:7,23)])
+
+RZQ_scaled_went <- glm(went_home ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + prob_to_go, data = RZQ_scaled_data, family = binomial)
+
+coef(RZQ_scaled_went) / sd(coef(RZQ_scaled_went))
+#      (Intercept)         run_dist          OF_dist        run_speed        top_speed 
+#       0.10692787      -2.41263554       1.00996991       0.11668999       0.38414052 
+# OF_momentum_home OF_momentum_side       prob_to_go 
+#       0.03586274       0.06824988       0.13738603 
+
 ##########################################################################################################################################
 
 YJD_final_data <- all_final_data_6 %>%
     filter(team == "YJD")
+
 YJD_confusion_matrix <- table(Predicted = YJD_final_data$should_go, Actual = YJD_final_data$went_home)
 print(YJD_confusion_matrix)
 #         Actual
@@ -182,6 +210,18 @@ mean(YJD_final_data$correct_decision)
 
 100 * sum(abs(ifelse(YJD_final_data$correct_decision == 0 & YJD_final_data$should_go == 0, abs(YJD_final_data$RE_diff), 0))) / sum(ifelse(YJD_final_data$should_go == 0, 1, 0))
 # 0.9605384
+
+YJD_scaled_data <- YJD_final_data
+
+YJD_scaled_data[,c(2:7,23)] <- scale(YJD_final_data[,c(2:7,23)])
+
+YJD_scaled_went <- glm(went_home ~ run_dist + OF_dist + run_speed + top_speed + OF_momentum_home + OF_momentum_side + prob_to_go, data = YJD_scaled_data, family = binomial)
+
+coef(YJD_scaled_went) / sd(coef(YJD_scaled_went))
+#      (Intercept)         run_dist          OF_dist        run_speed        top_speed 
+#       0.25980487      -2.28480076       1.19785725       0.50821780       0.14278247 
+# OF_momentum_home OF_momentum_side       prob_to_go 
+#       0.02779884       0.01762088      -0.02214193 
 
 ##########################################################################################################################################
 
