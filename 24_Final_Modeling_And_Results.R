@@ -80,15 +80,6 @@ team_info <- team_info %>%
 
 all_final_data_6 <- left_join(all_final_data_5, team_info[,5:6], by = "play_key")
 
-# ACN AKX ALA APZ AVV BEJ BVD CGA CMS CRQ DMS DYE ESW FBP GAX GEA GHD GIS HCI HKR HMN IAK IAQ IHI 
-#   3   4   2   9   3   2   4   5   2   7   5  34   7  12   6   4   7   9   3  10   7   1   9   3 
-# IKJ IXC JFU JIL JJS JMJ JNJ JZK KIR KJH KNB KQQ LFS MCJ MGJ MHY MRJ NSO NYA OWH OXG PHS POW PTB 
-#  11   3   7   7   6   8   1   5   4   5  20   6   7   2   4  13  11   2   4  11  29   1   3   5 
-# PVJ QEA QZE RDO RQJ RZQ STK TEQ TKJ TSZ UEX UKI UPU UWE VHS VMN VZE WJU WMI WNA WZR XAX XFE XLB 
-#   6  71  11   5   5 217  12   2   5  11   7   6  10   2   5   3   8   9   6   6   5   2   9   2 
-# YJD YUH 
-# 192   3
-
 all_final_data_6 <- all_final_data_6 %>%
     mutate(RE_diff = ((glm_safe * go_safe_RE) + ((1 - glm_safe) * go_out_RE)) - stay_RE )
 
@@ -98,7 +89,6 @@ mean(abs(ifelse(all_final_data_6$correct_decision == 0, abs(all_final_data_6$RE_
 
 100 * mean(abs(ifelse(all_final_data_6$correct_decision == 0, abs(all_final_data_6$RE_diff), 0)))
 # 1.653246
-
 
 # average run expectancy lost per decision where they should send a runner home
 sum(abs(ifelse(all_final_data_6$correct_decision == 0 & all_final_data_6$should_go == 1, abs(all_final_data_6$RE_diff), 0))) / sum(ifelse(all_final_data_6$should_go == 1, 1, 0))
