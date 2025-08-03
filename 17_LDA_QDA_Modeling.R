@@ -1,6 +1,11 @@
 library(dplyr)
 library(MASS)
 
+# eliminated one play from all_went_data that didn't fit my criteria
+all_went_data_2 <- all_went_data[,1:9] %>%
+    mutate(def_safe = ifelse(score_chance < 1, 0, 1))
+
+# creating a dataframe to store results
 aw2_lda_results <- data.frame(test_num = integer(), logloss = numeric())
 
 # Doing 100 tests of 10-fold stratified cross validation of LDA predicted safe probability vs score_chance
