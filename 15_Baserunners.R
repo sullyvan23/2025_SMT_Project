@@ -17,7 +17,7 @@ baserunner_data <- baserunner_data %>%
 baserunner_data <- baserunner_data %>%
     distinct(run_key, .keep_all = TRUE)
 
-
+# Note you'll see all_final_data number up as I add some new things and/or eliminate plays that I found didn't fit the criteria I wanted for the plays
 # Creating baserunner situations from data
 all_final_data_2 <- all_final_data %>%
     mutate(baserunners = paste(
