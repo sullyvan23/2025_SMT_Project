@@ -1,4 +1,4 @@
-# Reading in data into R, provided by Billy Fryer in the discord
+# Reading in data into R, provided by Billy Fryer in the discord, thank you
 
 library(arrow)
 library(tidyverse)
