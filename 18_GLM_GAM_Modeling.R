@@ -1,4 +1,5 @@
 library(dplyr)
+library(mgcv)
 
 # Testing bunch of different combinations with logistic regression model
 ds_gam_results <- data.frame(test_num = integer(), logloss = numeric())
