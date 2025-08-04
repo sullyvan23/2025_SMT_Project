@@ -1,3 +1,5 @@
+# Used some code from Billy Fryers "Should I Stay or Should I Go" project in his github, thank you
+
 library(dplyr)
 library(baseballr)
 library(purrr)
@@ -11,7 +13,7 @@ schedule <- mlb_schedule(season = 2021,
 
 game_ids <- unique(schedule$game_pk)
 
-# Getting all MiLB game data from 2021 with progress bar so I could actually see how long it was taking (it took a while)
+# Getting all MiLB game data from 2021 with progress bar so I could actually see how long it was taking and not shut off my computer (it took a while)
 with_progress({
     p <- progressor(along = game_ids)
     
